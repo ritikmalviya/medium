@@ -2,9 +2,15 @@ import express from 'express'
 import { AdvancedConsoleLogger, Connection, createConnection } from 'typeorm';
 import { Article } from './entities/Article';
 import { User } from './entities/User';
+import { userRoute } from './routes/user';
+import { usersRoute } from './routes/users';
 
 
 const app = express()
+app.use(express.json())
+app.use('/api/user',userRoute)
+app.use('/api/users',usersRoute)
+
 
 app.get('/', (req,res)=>{
     res.send("Hello World")
