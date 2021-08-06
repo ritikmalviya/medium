@@ -1,7 +1,23 @@
 import { Router } from "express";
-import { createUser } from "../controllers/users";
+import { createUser, loginUser } from "../controllers/users";
 
 const route = Router();
+
+
+route.post('/login',async (req,res)=>{
+    try{
+        const user = await loginUser(req.body.user)
+        return res.status(200).json({user})
+    }
+    catch (e){
+        // console.error(e);
+        return res.status(422).json({
+            errors:{body:['Login Failed',e.message]}
+        })
+    }
+}
+    )
+
 
 route.post('/',async (req,res)=>{
     try{
